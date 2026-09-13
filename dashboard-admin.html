@@ -36,6 +36,10 @@
     </main>
 
     <script>
+        if (!localStorage.getItem('usuario_nome')) {
+          alert('Acesso negado! Faça login primeiro.');
+          window.location.href = 'login.html';
+      }
       function openTab(tabId, btn) {
         document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
         document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
