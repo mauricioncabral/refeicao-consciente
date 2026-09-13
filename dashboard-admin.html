@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/dashboard.css?v=4.0">
+    <title>Painel Administrativo | Refeição Consciente</title>
+</head>
+<body class="admin-layout">
+
+    <aside class="sidebar" id="sidebar">
+        <button class="toggle-sidebar-btn" onclick="toggleSidebar()">☰</button>
+        <div class="sidebar-brand">
+            <h2 id="brand-text">Refeição <span>Consciente</span></h2>
+        </div>
+        <nav class="sidebar-nav">
+            <button class="nav-item active" onclick="openTab('tab-registro', this)"><span class="icon">📝</span> <span class="nav-text">Lançar Merenda</span></button>
+            <button class="nav-item" onclick="openTab('tab-cozinha', this)"><span class="icon">🍳</span> <span class="nav-text">Painel da Cozinha</span></button>
+            <button class="nav-item" onclick="openTab('tab-cardapio', this)"><span class="icon">📅</span> <span class="nav-text">Visão do Cardápio</span></button>
+            <button class="nav-item" onclick="openTab('tab-relatorio', this)"><span class="icon">📊</span> <span class="nav-text">Relatórios Mensais</span></button>
+        </nav>
+        <div class="sidebar-footer">
+            <div class="user-info">
+                <span class="user-name" id="nome-usuario-logado">Carregando...</span>
+                <span class="user-role">Administrador</span>
+            </div>
+            <button class="btn-logout" onclick="sair()">Sair</button>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <div id="tab-registro" class="tab-content active"><iframe src="registro-merenda.html"></iframe></div>
+        <div id="tab-cozinha" class="tab-content"><iframe src="painel-cozinha.html"></iframe></div>
+        <div id="tab-cardapio" class="tab-content"><iframe src="cardapio.html"></iframe></div>
+        <div id="tab-relatorio" class="tab-content"><iframe src="relatorio-admin.html"></iframe></div>
+    </main>
+
+    <script>
+      function openTab(tabId, btn) {
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
+        document.getElementById(tabId).classList.add('active');
+        btn.classList.add('active');
+      }
+      function toggleSidebar() {
+          document.getElementById('sidebar').classList.toggle('collapsed');
+      }
+      function sair() {
+        localStorage.removeItem('usuario_nome');
+        localStorage.removeItem('usuario_cargo');
+        window.location.href = 'login.html';
+      }
+      document.addEventListener('DOMContentLoaded', () => {
+          const nomeLogado = localStorage.getItem('usuario_nome') || 'Usuário';
+          const elementoNome = document.getElementById('nome-usuario-logado');
+          if(elementoNome) elementoNome.innerText = nomeLogado;
+      });
+    </script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/auth.css">
+    <title>Refeição Consciente - Cadastro</title>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h1>Cadastrar</h1>
+            <div id="msgError"></div>
+            <div id="msgSuccess"></div>
+            
+            <div class="labels">
+                <input type="text" id="nome" placeholder=" " required />
+                <label for="nome">Nome Completo</label>
+            </div>
+            <div class="labels">
+                <input type="email" id="email" placeholder=" " required />
+                <label for="email">E-mail</label>
+            </div>
+            <div class="labels">
+                <input type="text" id="usuario" placeholder=" " required />
+                <label for="usuario">Usuário</label>
+            </div>
+            <div class="labels">
+                <input type="password" id="senha" placeholder=" " required />
+                <label for="senha">Senha</label>
+            </div>
+            <div class="labels">
+                <input type="password" id="confirmaSenha" placeholder=" " required />
+                <label for="confirmaSenha">Confirme a Senha</label>
+            </div>
+            <div class="labels">
+                <select id="instituicao" required>
+                    <option value="" disabled selected>Selecione a Instituição</option>
+                    <option value="1">Escola Estadual Exemplo</option> 
+                </select>
+            </div>
+            <div class="labels">
+                <select id="cargo" required>
+                    <option value="" disabled selected>Selecione o Cargo</option>
+                    <option value="responsavel">Responsável de Turma / Professor</option>
+                    <option value="operador">Cozinheiro(a) / Operador</option>
+                    <option value="consumidor">Aluno / Consumidor</option>
+                </select>
+            </div>
+            <button onclick="cadastrar()">Cadastrar</button>
+
+            <div style="margin-top: 15px; display: flex; justify-content: center;">
+                <div id="g_id_onload" data-client_id="SEU_CLIENT_ID" data-callback="handleCredentialResponse"></div>
+                <div class="g_id_signin" data-type="standard"></div>
+            </div>
+
+            <p>Já tem uma conta? <a href="login.html">Faça Login</a></p>
+        </div>
+    </div>
+    <script src="js/auth.js"></script>
+</body>
+</html>

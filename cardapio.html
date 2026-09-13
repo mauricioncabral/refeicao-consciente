@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/dashboard.css?v=2.0">
+    <title>Cardápio Semanal</title>
+</head>
+<body>
+    <header class="top-bar">
+        <div>Usuário: <strong id="nome-usuario-logado">Carregando...</strong></div>
+        <button class="btn-sair" onclick="sair()">Sair</button>
+    </header>
+
+    <main class="main-container">
+        <div class="card-panel" style="text-align: center;">
+            <h1>Cardápio Semanal</h1>
+            
+            <div class="dias-tabs">
+                <button class="tab-btn" onclick="selecionarDia('segunda', this)">Segunda</button>
+                <button class="tab-btn" onclick="selecionarDia('terca', this)">Terça</button>
+                <button class="tab-btn" onclick="selecionarDia('quarta', this)">Quarta</button>
+                <button class="tab-btn" onclick="selecionarDia('quinta', this)">Quinta</button>
+                <button class="tab-btn" onclick="selecionarDia('sexta', this)">Sexta</button>
+            </div>
+
+            <div id="visualizacao-cardapio">
+                <h3 id="titulo-dia">Selecione um dia</h3>
+                <p><strong>Prato Principal:</strong> <span id="view-prato">-</span></p>
+                <p><strong>Acompanhamento:</strong> <span id="view-acompanhamento">-</span></p>
+            </div>
+
+            <!-- Oculto por padrão, será exibido pelo JS se o usuário for admin -->
+            <hr id="linha-edicao" style="margin: 30px 0; display: none;">
+            <div id="painel-edicao" style="display: none; text-align: left; max-width: 400px; margin: 0 auto;">
+                <h3>Editar Cardápio do Dia</h3>
+                <div style="margin-bottom: 10px;">
+                    <label>Prato Principal:</label>
+                    <input type="text" id="edit-prato">
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label>Acompanhamento:</label>
+                    <input type="text" id="edit-acompanhamento">
+                </div>
+                <button onclick="salvarCardapio()" class="btn-primary" style="width: 100%;">Salvar Alteração</button>
+            </div>
+        </div>
+    </main>
+    <script src="js/cardapio.js"></script>
+</body>
+</html>

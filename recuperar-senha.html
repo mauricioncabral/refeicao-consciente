@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/auth.css">
+    <title>Refeição Consciente - Redefinir Senha</title>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h1>Redefinir Senha</h1>
+            <p class="subtitle">Confirme seus dados cadastrados para alterar a senha</p>
+            
+            <div id="msgError"></div>
+            <div id="msgSuccess"></div>
+
+            <div class="labels">
+                <input type="text" id="rec-usuario" placeholder=" " required />
+                <label for="rec-usuario">Seu Usuário</label>
+            </div>
+
+            <!-- MODIFICADO: Agora solicita o E-mail em vez do Nome -->
+            <div class="labels">
+                <input type="email" id="rec-email" placeholder=" " required />
+                <label for="rec-email">E-mail Cadastrado</label>
+            </div>
+
+            <div class="labels">
+                <input type="password" id="nova-senha" placeholder=" " required />
+                <label for="nova-senha">Nova Senha</label>
+            </div>
+
+            <div class="labels">
+                <input type="password" id="confirma-senha" placeholder=" " required />
+                <label for="confirma-senha">Confirme a Nova Senha</label>
+            </div>
+
+            <button onclick="redefinirSenha()">Alterar Senha</button>
+            
+            <p class="footer-text"><a href="login.html">← Voltar para o Login</a></p>
+        </div>
+     </div>
+    <script src="js/auth.js"></script>
+</body>
+</html>

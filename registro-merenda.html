@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/dashboard.css?v=5.0">
+    <title>Registro de Merenda</title>
+</head>
+<body>
+    <header class="top-bar">
+        <div>Responsável: <strong id="nome-usuario-logado">Carregando...</strong></div>
+        <button class="btn-sair" onclick="sair()">Sair</button>
+    </header>
+
+    <main class="main-container">
+        <h1>Registro de Merenda das Turmas</h1>
+        <div class="card-panel">
+            <div class="panel-section">
+                <label for="select-sala">Sala de Aula</label>
+                <select id="select-sala" name="sala">
+                    <option value="" disabled selected>Selecione a Sala</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="Salão">Salão</option>
+                </select>
+            </div>
+
+            <div class="panel-section">
+                <label for="diminuir-btn">Quantidade de Alunos</label>
+                <div class="quantidade-counter">
+                    <button type="button" id="diminuir-btn" aria-label="Diminuir alunos">-</button>
+                    <span id="quantidade">0</span>
+                    <button type="button" id="aumentar-btn" aria-label="Aumentar alunos">+</button>
+                </div>
+            </div>
+
+            <div class="panel-section">
+                <label>Turno</label>
+                <div class="radio-group">
+                    <label><input type="radio" id="turno-manha" name="turno" value="Manhã"> Manhã</label>
+                    <label><input type="radio" id="turno-tarde" name="turno" value="Tarde"> Tarde</label>
+                    <label><input type="radio" id="turno-noite" name="turno" value="Noite"> Noite</label>
+                </div>
+            </div>
+
+            <div class="actions" style="margin-top: 25px;">
+                <button type="button" class="btn-primary" id="enviar">Enviar Registro</button>
+            </div>
+        </div>
+    </main>
+    <script src="js/merenda.js"></script>
+</body>
+</html>
