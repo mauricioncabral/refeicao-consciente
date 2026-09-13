@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/auth.css">
+    <title>Refeição Consciente - Login</title>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h1>Refeição Consciente</h1>
+            <p class="subtitle">Acesse sua conta para continuar</p>
+            
+            <div id="msgError"></div>
+            <div id="msgSuccess"></div>
+
+            <div class="labels">
+                <input type="text" id="usuario" placeholder=" " required />
+                <label for="usuario">Usuário</label>
+            </div>
+            
+            <div class="labels">
+                <input type="password" id="senha" placeholder=" " required />
+                <label for="senha">Senha</label>
+            </div>
+
+            <a href="recuperar-senha.html" class="forgot-password-link">Esqueceu a senha?</a>
+
+            <button onclick="entrar()">Entrar no Sistema</button>
+            
+            <p class="footer-text">Não tem uma conta? <a href="cadastro.html">Cadastre-se</a></p>
+        </div>
+    </div>
+    <script>
+        window.onload = function() {
+            if(localStorage.getItem('usuario_nome')) {
+                // Lógica de redirecionamento futuro caso já esteja logado
+            }
+        }
+    </script>
+    <script src="js/auth.js"></script>
+</body>
+</html>
