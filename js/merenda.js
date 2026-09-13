@@ -1,3 +1,7 @@
+if (!localStorage.getItem('usuario_nome')) {
+          alert('Acesso negado! Faça login primeiro.');
+          window.location.href = 'login.html';
+      }
 let qtd = 0;
 const qtdText = document.getElementById('quantidade');
 
