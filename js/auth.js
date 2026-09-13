@@ -1,3 +1,4 @@
+const API_URL = "https://76h61crjx5.execute-api.us-east-2.amazonaws.com/default/LoginRefeicao"
 async function redefinirSenha() {
     const usuarioEl = document.querySelector('#rec-usuario');
     const emailEl = document.querySelector('#rec-email');
