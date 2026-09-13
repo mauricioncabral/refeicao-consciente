@@ -1,4 +1,4 @@
-const API_URL = "https://76h61crjx5.execute-api.us-east-2.amazonaws.com/default/LoginRefeicao"
+const API_URL = "https://76h61crjx5.execute-api.us-east-2.amazonaws.com/default/LoginRefeicao](https://76h61crjx5.execute-api.us-east-2.amazonaws.com/default/LoginRefeicao"
 // Função para realizar o login
 async function entrar() {
     const usuarioInput = document.getElementById('usuario').value.trim();
