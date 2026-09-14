@@ -2,18 +2,20 @@ if (!localStorage.getItem('usuario_nome')) {
           alert('Acesso negado! Faça login primeiro.');
           window.location.href = 'login.html';
       }
-const API_URL = 'api/api.php';
+const API_URL = "https76h61crjx5.execute-api.us-east-2.amazonaws.com/default/LoginRefeicao"; // Ajuste o link se necessário
 
 async function carregarMerenda() {
     try {
-        const res = await fetch(`${API_URL}?acao=obter_merenda`);
-        const json = await res.json();
+        const resposta = await fetch(API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ acao: 'obter_merenda' }) // Ou a ação correspondente da cozinha
+        });
 
-        if (json.sucesso) {
-            atualizarPainel(json.dados);
-        }
+        const json = await resposta.json();
+        // ... sua lógica para preencher os dados da cozinha ...
     } catch (erro) {
-        console.error('Erro de conexão:', erro);
+        console.error("Erro de conexão:", erro);
     }
 }
 
