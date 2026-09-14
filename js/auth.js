@@ -40,8 +40,14 @@ async function entrar() {
                 // Redirecionamento dinâmico conforme o cargo salvo no banco
                 if (resultado.cargo === 'adm') {
                     window.location.href = 'dashboard-admin.html';
+                } else if (cargo === 'responsavel') {
+                    window.location.href = 'registro-merenda.html';
+                } else if (cargo === 'operador') {
+                    window.location.href = 'painel-cozinha.html'; // Ou o nome da página do painel da cozinha
+                } else if (cargo === 'consumidor') {
+                    window.location.href = 'cardapio.html'; // Ou a página inicial do aluno/consumidor
                 } else {
-                    window.location.href = 'dashboard-responsavel.html'; // Ajuste se necessário para outra página
+                    window.location.href = 'cardapio.html'; // Página padrão de segurança
                 }
             }, 1500);
         } else {
