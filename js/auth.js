@@ -35,19 +35,21 @@ async function entrar() {
             localStorage.setItem('token', resultado.token);
             localStorage.setItem('cargo', resultado.cargo);
             localStorage.setItem('usuario_nome', usuarioInput);
+            
+                setTimeout(() => {
+                // Padroniza o cargo para minúsculo e remove espaços extras
+                const cargo = resultado.cargo ? resultado.cargo.trim().toLowerCase() : '';
 
-            setTimeout(() => {
-                // Redirecionamento dinâmico conforme o cargo salvo no banco
-                if (resultado.cargo === 'adm') {
+                if (cargo === 'adm') {
                     window.location.href = 'dashboard-admin.html';
                 } else if (cargo === 'responsavel') {
                     window.location.href = 'registro-merenda.html';
                 } else if (cargo === 'operador') {
-                    window.location.href = 'painel-cozinha.html'; // Ou o nome da página do painel da cozinha
+                    window.location.href = 'painel-cozinha.html';
                 } else if (cargo === 'consumidor') {
-                    window.location.href = 'cardapio.html'; // Ou a página inicial do aluno/consumidor
+                    window.location.href = 'cardapio.html';
                 } else {
-                    window.location.href = 'cardapio.html'; // Página padrão de segurança
+                    window.location.href = 'cardapio.html'; // Segurança padrão
                 }
             }, 1500);
         } else {
