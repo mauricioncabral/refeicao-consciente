@@ -1,4 +1,5 @@
 const API_URL = "https://76h61crjx5.execute-api.us-east-2.amazonaws.com/default/LoginRefeicao";
+
 // Função para realizar o login
 async function entrar() {
     const usuarioInput = document.getElementById('usuario').value.trim();
@@ -21,6 +22,7 @@ async function entrar() {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
+                acao: 'login', // Indica para a Lambda que é uma tentativa de login
                 userCad: usuarioInput,
                 senhaCad: senhaInput
             })
@@ -36,7 +38,8 @@ async function entrar() {
             localStorage.setItem('usuario_nome', usuarioInput);
 
             setTimeout(() => {
-                window.location.href = 'painel.html';
+                // Corrigido para redirecionar para a dashboard correta
+                window.location.href = 'dashboard-admin.html';
             }, 1500);
         } else {
             if (msgError) msgError.innerHTML = resultado.mensagem || 'Usuário ou senha incorretos.';
@@ -70,6 +73,7 @@ async function cadastrar() {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
+                acao: 'cadastrar', // Indica para a Lambda que é um novo cadastro
                 userCad: usuarioInput,
                 senhaCad: senhaInput
             })
