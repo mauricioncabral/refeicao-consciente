@@ -1,5 +1,4 @@
 const API_URL = "https://76h61crjx5.execute-api.us-east-2.amazonaws.com/default/LoginRefeicao";
-
 // Função para realizar o login
 async function entrar() {
     const usuarioInput = document.getElementById('usuario').value.trim();
@@ -22,7 +21,7 @@ async function entrar() {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                acao: 'login', // Indica para a Lambda que é uma tentativa de login
+                acao: 'login',
                 userCad: usuarioInput,
                 senhaCad: senhaInput
             })
@@ -38,8 +37,12 @@ async function entrar() {
             localStorage.setItem('usuario_nome', usuarioInput);
 
             setTimeout(() => {
-                // Corrigido para redirecionar para a dashboard correta
-                window.location.href = 'dashboard-admin.html';
+                // Redirecionamento dinâmico conforme o cargo salvo no banco
+                if (resultado.cargo === 'adm') {
+                    window.location.href = 'dashboard-admin.html';
+                } else {
+                    window.location.href = 'dashboard-responsavel.html'; // Ajuste se necessário para outra página
+                }
             }, 1500);
         } else {
             if (msgError) msgError.innerHTML = resultado.mensagem || 'Usuário ou senha incorretos.';
@@ -51,18 +54,31 @@ async function entrar() {
     }
 }
 
-// Função para realizar o cadastro de novos usuários
+// Função para realizar o cadastro de novos usuários (blindada e completa)
 async function cadastrar() {
+    const nomeInput = document.getElementById('nome').value.trim();
+    const emailInput = document.getElementById('email').value.trim();
     const usuarioInput = document.getElementById('usuario').value.trim();
     const senhaInput = document.getElementById('senha').value;
+    const confirmaSenhaInput = document.getElementById('confirmaSenha').value;
+    const instituicaoInput = document.getElementById('instituicao').value;
+    const cargoInput = document.getElementById('cargo').value;
+
     const msgError = document.getElementById('msgError');
     const msgSuccess = document.getElementById('msgSuccess');
 
     if (msgError) msgError.innerHTML = '';
     if (msgSuccess) msgSuccess.innerHTML = '';
 
-    if (!usuarioInput || !senhaInput) {
+    // Valida se todos os campos obrigatórios estão preenchidos
+    if (!nomeInput || !emailInput || !usuarioInput || !senhaInput || !confirmaSenhaInput || !instituicaoInput || !cargoInput) {
         if (msgError) msgError.innerHTML = 'Preencha todos os campos.';
+        return;
+    }
+
+    // Valida se as senhas coincidem
+    if (senhaInput !== confirmaSenhaInput) {
+        if (msgError) msgError.innerHTML = 'As senhas não coincidem!';
         return;
     }
 
@@ -73,9 +89,13 @@ async function cadastrar() {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                acao: 'cadastrar', // Indica para a Lambda que é um novo cadastro
+                acao: 'cadastrar',
+                nome: nomeInput,
+                email: emailInput,
                 userCad: usuarioInput,
-                senhaCad: senhaInput
+                senhaCad: senhaInput,
+                instituicao: instituicaoInput,
+                cargoCad: cargoInput
             })
         });
 
