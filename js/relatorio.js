@@ -1,8 +1,10 @@
- if (!localStorage.getItem('usuario_nome')) {
-          alert('Acesso negado! Faça login primeiro.');
-          window.location.href = 'login.html';
-      }
-const API_URL = 'api/api.php';
+if (!localStorage.getItem('usuario_nome')) {
+      alert('Acesso negado! Faça login primeiro.');
+      window.location.href = 'login.html';
+}
+
+// 1. Atualizado para apontar diretamente para a AWS Lambda
+const API_URL = "https://76h61crjx5.execute-api.us-east-2.amazonaws.com/default/LoginRefeicao";
 
 async function buscarRelatorioMensal() {
     const mes = document.getElementById('select-mes').value;
@@ -12,13 +14,30 @@ async function buscarRelatorioMensal() {
     tbody.innerHTML = '<tr><td colspan="3">Carregando dados...</td></tr>';
 
     try {
-        const res = await fetch(`${API_URL}?acao=relatorio_mensal&mes=${mes}&ano=${ano}`);
+        // 2. Modificado para enviar via POST com JSON contendo a ação, mês e ano
+        const res = await fetch(API_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                acao: 'obter_relatorio',
+                mes: mes,
+                ano: ano
+            })
+        });
+
         if (!res.ok) throw new Error('Resposta do servidor não foi OK');
         
         const json = await res.json();
-        if (json.sucesso) preencherTabelaRelatorio(json.dados);
-        else tbody.innerHTML = `<tr><td colspan="3">${json.mensagem || 'Nenhum dado encontrado.'}</td></tr>`;
+        if (json.sucesso) {
+            // Nota: Se a sua Lambda retornar a lista na propriedade 'relatorio', ajustamos para 'json.relatorio'
+            preencherTabelaRelatorio(json.relatorio || json.dados);
+        } else {
+            tbody.innerHTML = `<tr><td colspan="3">${json.mensagem || 'Nenhum dado encontrado.'}</td></tr>`;
+        }
     } catch (erro) {
+        console.error("Erro ao buscar relatório:", erro);
         tbody.innerHTML = '<tr><td colspan="3">Erro ao conectar ao servidor.</td></tr>';
     }
 }
@@ -36,13 +55,17 @@ function preencherTabelaRelatorio(registros) {
     }
 
     registros.forEach(item => {
-        const qtd = parseInt(item.total_dia, 10);
+        const qtd = parseInt(item.total_dia || 0, 10);
         somaTotal += qtd;
-        const partesData = item.data_registro.split('-');
-        const dataFormatada = `${partesData[2]}/${partesData[1]}/${partesData[0]}`;
+        
+        let dataFormatada = item.data_registro || '';
+        if (dataFormatada.includes('-')) {
+            const partesData = dataFormatada.split('-');
+            dataFormatada = `${partesData[2]}/${partesData[1]}/${partesData[0]}`;
+        }
 
         const tr = document.createElement('tr');
-        tr.innerHTML = `<td>${dataFormatada}</td><td>${item.turno}</td><td><strong>${qtd}</strong></td>`;
+        tr.innerHTML = `<td>${dataFormatada}</td><td>${item.turno || '-'}</td><td><strong>${qtd}</strong></td>`;
         tbody.appendChild(tr);
     });
 
