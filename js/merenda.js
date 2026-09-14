@@ -23,7 +23,7 @@ document.getElementById('enviar').onclick = async () => {
 
 async function sair() {
     await fetch('api/api.php?acao=logout');
-    window.location.href = 'login.php';
+    window.location.href = 'login.html';
 }
 document.addEventListener('DOMContentLoaded', () => {
     // Verifica se a página está aberta dentro de um iframe (Painel do Admin)
